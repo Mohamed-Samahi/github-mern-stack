@@ -1,0 +1,5 @@
+export { default as ExplorePage } from "./ExplorePage"
+export { default as HomePage } from "./HomePage"
+export { default as LikesPage } from "./LikesPage"
+export { default as LoginPage } from "./LoginPage"
+export { default as SignUpPage } from "./SignUpPage"
