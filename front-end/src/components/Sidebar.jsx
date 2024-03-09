@@ -5,23 +5,27 @@ import { MdOutlineExplore } from "react-icons/md";
 import { PiSignInBold } from "react-icons/pi";
 import { MdEditDocument } from "react-icons/md";
 import Logout from "./Logout";
+import { getUsernameFromSearchParams } from "../utils/getUrlParams";
 
 const Sidebar = () => {
     const location = useLocation()
+    const username = getUsernameFromSearchParams();
     const authUser = false;
 
     return (
         <aside
-            className='flex flex-col items-center min-w-12 sm:w-16 sticky top-0 left-0 h-screen py-8 overflow-y-auto border-r bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 
-		hover:bg-gray-600/10 border-gray-800 text-white'
+            className='sticky top-0 left-0 flex flex-col items-center h-screen py-8 overflow-y-auto text-white border-r border-gray-800 min-w-12 sm:w-16 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 hover:bg-gray-600/10'
         >
-            <nav className='h-full flex flex-col gap-3'>
-                <Link to='/' className='flex justify-center'>
+            <nav className='flex flex-col h-full gap-3'>
+                <Link
+                    to='/'
+                    className='flex justify-center'
+                >
                     <img className='h-8' src='/github.svg' alt='Github Logo' />
                 </Link>
 
                 <Link
-                    to='/'
+                    to={`/?username=${username}`}
                     className={`p-1.5 flex justify-center transition-colors duration-200 rounded-lg 
 					hover:bg-gray-800 ${location.pathname === "/" ? "bg-gray-800" : null}`}
                 >
