@@ -18,7 +18,9 @@ const HomePage = () => {
             {(userProfile && sortedRepositories && !loading) ? (
                 <div className='flex flex-col items-start justify-center gap-4 md:flex-row'>
                     {userProfile && <ProfileInfo userProfile={userProfile} />}
-                    {sortedRepositories && <Repos repositories={sortedRepositories} />}
+                    <div className="lg:w-2/3 ">
+                        {sortedRepositories && <Repos repositories={sortedRepositories} />}
+                    </div>
                 </div>
             ) : null
             }
