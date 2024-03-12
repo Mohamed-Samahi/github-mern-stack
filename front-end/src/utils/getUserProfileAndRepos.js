@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { fetchData } from "./fetchData";
 
 export const getUserProfile = async (userProfileApi) => {
@@ -13,20 +14,28 @@ export const getUserRepositories = async (userRepositoriesApi) => {
 }
 
 export const getUserData = async (username) => {
+    let error = false
     try {
         const userProfileApi = `https://api.github.com/users/${username}`;
         const userRepositoriesApi = `https://api.github.com/users/${username}/repos`;
 
         // Execute both requests in parallel and destructure the results
-        const [userProfile, userRepositories] = await Promise.all([
+        const userData = await Promise.all([
             getUserProfile(userProfileApi),
             getUserRepositories(userRepositoriesApi)
-        ]);
+        ])
+
+        for (let i = 0; i < userData?.length; i++) {
+            if (userData[i].error) return error = true
+        }
+
+        if (error) return toast.error(response[0].error)
+
+        const [userProfile, userRepositories] = userData;
 
         return { userProfile, userRepositories };
 
     } catch (error) {
-        toast.error(error.message);
         return { error: error.message };
     }
 }

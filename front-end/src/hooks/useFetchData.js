@@ -23,12 +23,13 @@ export const useFetchData = (setUserProfile, setRepositories) => {
 
         const { userProfile, userRepositories, error } = await getUserData(username);
 
-        if (!error) {
-            updateCache(username, { cachedUserProfile: userProfile, cachedRepositories: userRepositories });
-            setUserProfile(userProfile);
-            setRepositories(userRepositories);
-        }
+        if (error) return setLoading(prev => false);
+
+        updateCache(username, { cachedUserProfile: userProfile, cachedRepositories: userRepositories });
+        setUserProfile(userProfile);
+        setRepositories(userRepositories);
         setLoading(false);
+
     }, [cache, location.search]);
 
     return { fetchData, loading, location };
