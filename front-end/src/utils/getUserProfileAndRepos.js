@@ -1,37 +1,14 @@
-import toast from "react-hot-toast";
 import { fetchData } from "./fetchData";
 
-export const getUserProfile = async (userProfileApi) => {
-    const userProfile = await fetchData(userProfileApi)
-
-    return userProfile;
-}
-
-export const getUserRepositories = async (userRepositoriesApi) => {
-    const userRepositories = await fetchData(userRepositoriesApi)
-
-    return userRepositories;
-}
-
-export const getUserData = async (username) => {
-    let error = false
+export const getUserProfileAndRepositories = async (username) => {
     try {
-        const userProfileApi = `https://api.github.com/users/${username}`;
-        const userRepositoriesApi = `https://api.github.com/users/${username}/repos`;
+        const userDataResponse = await fetchData(`http://localhost:5000/api/user/profile/${username}`)
 
-        // Execute both requests in parallel and destructure the results
-        const userData = await Promise.all([
-            getUserProfile(userProfileApi),
-            getUserRepositories(userRepositoriesApi)
-        ])
+        const { userProfile, userRepositories } = userDataResponse
 
-        for (let i = 0; i < userData?.length; i++) {
-            if (userData[i].error) return error = true
+        if (!userDataResponse.ok) {
+            throw new Error("An Error Occured While Getting User Data")
         }
-
-        if (error) return toast.error(response[0].error)
-
-        const [userProfile, userRepositories] = userData;
 
         return { userProfile, userRepositories };
 

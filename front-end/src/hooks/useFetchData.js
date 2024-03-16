@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useCache } from "./useCache";
 import { getUsernameFromSearchParams } from "../utils/getUrlParams";
-import { getUserData } from "../utils/getUserProfileAndRepos";
+import { getUserProfileAndRepositories } from "../utils/getUserProfileAndRepos";
 
 export const useFetchData = (setUserProfile, setRepositories) => {
     const [loading, setLoading] = useState(true);
@@ -21,7 +21,7 @@ export const useFetchData = (setUserProfile, setRepositories) => {
             return;
         }
 
-        const { userProfile, userRepositories, error } = await getUserData(username);
+        const { userProfile, userRepositories, error } = await getUserProfileAndRepositories(username);
 
         if (error) return setLoading(prev => false);
 
