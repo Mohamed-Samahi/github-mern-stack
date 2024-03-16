@@ -30,8 +30,9 @@ const ExplorePage = () => {
 
         try {
             const res = await fetch(
-                `https://api.github.com/search/repositories?q=language:${language}&sort=stars&order=desc&per_page=10&page=${page}`
+                `http://localhost:5000/api/explore/repos/${language}?page=${page}`
             );
+
             const { items } = await res.json();
 
             setRepos(items);
@@ -68,34 +69,38 @@ const ExplorePage = () => {
                     {/* Repeat for other languages */}
                 </div>
                 {repos?.length > 0 && (
-                    <h2 className='my-4 text-lg font-semibold text-center'>
-                        <span className='bg-blue-100 text-blue-800 font-medium me-2 px-2.5 py-0.5 rounded-full '>
+                    <h2 className='flex items-center justify-center gap-2 my-4 text-lg font-semibold text-center'>
+                        <span className='bg-blue-100 text-blue-800 font-medium inline-flex items-center justify-center px-2.5 py-0.5 rounded-full '>
                             {selectedLanguage.toUpperCase()}{' '}
                         </span>
                         Repositories
                     </h2>
                 )}
-                {!loading && repos?.length > 0 && <Repos repositories={repos} />}
-                {loading && <Spinner />}
+                <div className='flex flex-col items-center gap-5'>
+                    {!loading && repos?.length > 0 && <Repos repositories={repos} />}
+                    {loading && <Spinner />}
 
-                {/* Pagination Controls */}
-                <div className="flex justify-center mt-4 space-x-4">
-                    {(
-                        <button
-                            className={`px-4 py-2 font-semibold text-gray-800 bg-gray-200 rounded ${currentPage === 1 ? "opacity-25" : "hover:bg-gray-300"}`}
-                            onClick={() => setCurrentPage(currentPage - 1)}
-                            disabled={currentPage === 1}
-                        >
-                            Previous
-                        </button>
-                    )}
-                    <span>Page {currentPage}</span>
-                    <button
-                        className="px-4 py-2 font-semibold text-white bg-blue-500 rounded hover:bg-blue-700"
-                        onClick={() => setCurrentPage(currentPage + 1)}
-                    >
-                        Next
-                    </button>
+                    {/* Pagination Controls */}
+                    {repos?.length > 0 || Object.keys(cache).length > 0 ? (
+                        <div className="flex items-center justify-center gap-4">
+                            <button
+                                className={`px-2 py-1 text-sm font-semibold text-gray-800 bg-gray-200 rounded ${currentPage === 1 ? "opacity-25" : "hover:bg-gray-300"}`}
+                                onClick={() => setCurrentPage(currentPage - 1)}
+                                disabled={currentPage === 1}
+                            >
+                                Previous
+                            </button>
+
+                            <span className='text-base font-bold text-white'>Page {currentPage}</span>
+
+                            <button
+                                className="px-2 py-1 text-sm font-semibold text-white bg-blue-500 rounded hover:bg-blue-700"
+                                onClick={() => setCurrentPage(currentPage + 1)}
+                            >
+                                Next
+                            </button>
+                        </div>
+                    ) : null}
                 </div>
             </div>
         </div>
