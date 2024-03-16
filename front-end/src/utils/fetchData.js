@@ -1,10 +1,8 @@
-import toast from "react-hot-toast";
-
 export const fetchData = async (url) => {
     try {
         const response = await fetch(url, {
             headers: {
-                "authorization": `Bearer ${import.meta.env.VITE_GITHUB_API_KEY}`
+                "content-type": "application/json"
             }
         })
 
@@ -16,6 +14,7 @@ export const fetchData = async (url) => {
 
     } catch (error) {
         const errorMessage = { error: error.message }
+        console.log(errorMessage);
         return errorMessage
     }
 }
