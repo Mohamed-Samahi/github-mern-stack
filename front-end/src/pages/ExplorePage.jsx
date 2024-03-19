@@ -11,6 +11,10 @@ const ExplorePage = () => {
     const [cache, setCache] = useState({});
 
     useEffect(() => {
+        setCurrentPage(prev => 1)
+    }, [selectedLanguage])
+
+    useEffect(() => {
         // This effect runs when the selectedLanguage or currentPage changes.
         if (selectedLanguage) {
             exploreRepos(selectedLanguage, currentPage);
@@ -19,7 +23,6 @@ const ExplorePage = () => {
 
     const exploreRepos = async (language, page) => {
         setLoading(true);
-        setRepos([]);
 
         const cacheKey = `${language}-${page}`;
         if (cache[cacheKey]) {
@@ -39,11 +42,14 @@ const ExplorePage = () => {
 
             const newCache = { ...cache, [cacheKey]: items };
             const cacheKeys = Object.keys(newCache);
+
             if (cacheKeys.length > 5) {
                 const oldestKey = cacheKeys.sort((a, b) => newCache[a].cacheTime - newCache[b].cacheTime)[0];
                 delete newCache[oldestKey];
             }
+
             setCache(newCache);
+
         } catch (error) {
             toast.error(error.message);
         } finally {
@@ -52,21 +58,40 @@ const ExplorePage = () => {
     };
 
     return (
-        <div className='px-4'>
+        <div className='flex-1 flex-grow h-full px-4'>
             <div className='max-w-2xl p-4 mx-auto rounded-md bg-glass'>
                 <h1 className='text-xl font-bold text-center'>Explore Popular Repositories</h1>
                 <div className='flex flex-wrap justify-center gap-2 my-2'>
-                    {/* Simplified for brevity, add your image buttons here */}
                     <img
                         src='/javascript.svg'
-                        alt='JavaScript logo'
+                        alt='JavaScript ogo'
                         className='cursor-pointer h-11 sm:h-20'
-                        onClick={() => {
-                            setSelectedLanguage('javascript');
-                            setCurrentPage(1); // Reset to page 1
-                        }}
+                        onClick={() => setSelectedLanguage("javascript")}
                     />
-                    {/* Repeat for other languages */}
+                    <img
+                        src='/typescript.svg'
+                        alt='TypeScript logo'
+                        className='cursor-pointer h-11 sm:h-20'
+                        onClick={() => setSelectedLanguage("typescript")}
+                    />
+                    <img
+                        src='/c++.svg'
+                        alt='C++ logo'
+                        className='cursor-pointer h-11 sm:h-20'
+                        onClick={() => setSelectedLanguage("c++")}
+                    />
+                    <img
+                        src='/python.svg'
+                        alt='Python logo'
+                        className='cursor-pointer h-11 sm:h-20'
+                        onClick={() => setSelectedLanguage("python")}
+                    />
+                    <img
+                        src='/java.svg'
+                        alt='Java logo'
+                        className='cursor-pointer h-11 sm:h-20'
+                        onClick={() => setSelectedLanguage("java")}
+                    />
                 </div>
                 {repos?.length > 0 && (
                     <h2 className='flex items-center justify-center gap-2 my-4 text-lg font-semibold text-center'>

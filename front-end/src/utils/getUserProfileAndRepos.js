@@ -6,10 +6,6 @@ export const getUserProfileAndRepositories = async (username) => {
 
         const { userProfile, userRepositories } = userDataResponse
 
-        if (!userDataResponse.ok) {
-            throw new Error("An Error Occured While Getting User Data")
-        }
-
         return { userProfile, userRepositories };
 
     } catch (error) {

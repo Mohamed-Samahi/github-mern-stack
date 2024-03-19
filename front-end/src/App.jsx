@@ -5,11 +5,12 @@ import { Sidebar } from './components';
 import { ExplorePage, HomePage, LikesPage, LoginPage, SignUpPage } from './pages';
 
 import { Toaster } from 'react-hot-toast';
+import Modal from './components/Modal';
 
 function App() {
 
   return (
-    <div className='flex h-screen max-h-screen overflow-hidden'>
+    <div className='relative flex'>
       <Toaster
         position="bottom-right"
         toastOptions={{
@@ -26,18 +27,17 @@ function App() {
           },
         }}
       />
-
+      <Modal />
       <Sidebar />
-      <div className='flex items-center justify-center flex-1 w-full h-full overflow-x-hidden overflow-y-auto text-white transition-all duration-300'>
-        <div className='w-full h-full max-w-5xl mx-auto my-5'>
-          <Routes>
-            <Route path='/' element={<HomePage />} />
-            <Route path='/login' element={<LoginPage />} />
-            <Route path='/signup' element={<SignUpPage />} />
-            <Route path='/explore' element={<ExplorePage />} />
-            <Route path='/likes' element={<LikesPage />} />
-          </Routes>
-        </div>
+      <div className='flex items-center justify-center flex-1 w-full max-w-5xl mx-auto my-5 text-white transition-all duration-300'>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/signup' element={<SignUpPage />} />
+          <Route path='/explore' element={<ExplorePage />} />
+          <Route path='/likes' element={<LikesPage />} />
+        </Routes>
+        <Toaster />
       </div>
     </div>
   );

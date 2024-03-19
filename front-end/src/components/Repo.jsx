@@ -1,11 +1,12 @@
+import React from "react";
+
 import { FaCodeBranch, FaCopy, FaRegStar } from "react-icons/fa";
 import { FaCodeFork } from "react-icons/fa6";
 import { formatDate } from "../utils/formatDate";
 import { PROGRAMMING_LANGUAGES } from "../constants/programmingLanguages";
 import toast from "react-hot-toast"
 
-const Repo = ({ repository }) => {
-
+const Repo = React.memo(({ repository }) => {
     const formatedDate = formatDate(repository?.pushed_at)
 
     const handleCloneClick = async (repository) => {
@@ -17,7 +18,6 @@ const Repo = ({ repository }) => {
             toast.error("Failed to copy link.");
         }
     };
-
 
     return (
         <li className='mb-10 ms-7'>
@@ -66,11 +66,10 @@ const Repo = ({ repository }) => {
             </p>
             {repository?.language ?
                 <img src={PROGRAMMING_LANGUAGES[repository?.language]} alt='Programming language icon' className='h-8' />
-
                 : null
             }
         </li>
     );
-};
+});
 
 export default Repo;

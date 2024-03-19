@@ -1,9 +1,10 @@
 import { FaHeart } from "react-icons/fa";
 
 const LikesPage = () => {
+
     return (
-        <div className='relative overflow-x-auto shadow-md rounded-lg px-4'>
-            <table className='w-full text-sm text-left rtl:text-right bg-glass overflow-hidden'>
+        <div className='relative flex-1 flex-grow h-full px-4 overflow-x-auto rounded-lg shadow-md'>
+            <table className='w-full overflow-hidden text-sm text-left rtl:text-right bg-glass'>
                 <thead className='text-xs uppercase bg-glass'>
                     <tr>
                         <th scope='col' className='p-4'>
@@ -21,7 +22,7 @@ const LikesPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr className='bg-glass border-b'>
+                    <tr className='border-b bg-glass'>
                         <td className='w-4 p-4'>
                             <div className='flex items-center'>
                                 <span>1</span>
@@ -40,7 +41,7 @@ const LikesPage = () => {
                         <td className='px-6 py-4'>das</td>
                         <td className='px-6 py-4'>
                             <div className='flex items-center'>
-                                <FaHeart size={22} className='text-red-500 mx-2' />
+                                <FaHeart size={22} className='mx-2 text-red-500' />
                                 Liked your profile
                             </div>
                         </td>

@@ -2,11 +2,11 @@ import React from "react";
 import { ProfileInfo, Repos, Search, SortRepos, Spinner } from "../components";
 import { useUser } from "../contexts/UserContext";
 
-const HomePage = () => {
+const HomePage = React.memo(() => {
     const { userProfile, loading, sortedRepositories } = useUser();
 
     return (
-        <div className='h-full m-4'>
+        <div className='flex-1 flex-grow h-full m-4'>
             <Search />
             <SortRepos />
             {loading ? (
@@ -26,6 +26,6 @@ const HomePage = () => {
             }
         </div>
     );
-};
+});
 
 export default HomePage;

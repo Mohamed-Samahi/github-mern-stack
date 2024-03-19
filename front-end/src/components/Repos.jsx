@@ -1,6 +1,9 @@
+import React from "react";
 import Repo from "./Repo";
 
-const Repos = ({ repositories }) => {
+const Repos = React.memo(({ repositories }) => {
+    if (!repositories) return null;
+
     return (
         <div className={`w-full bg-glass rounded-lg px-8 py-6`}>
             <ol className='relative w-full border-gray-200 border-s'>
@@ -18,6 +21,6 @@ const Repos = ({ repositories }) => {
             </ol>
         </div>
     );
-};
+});
 
 export default Repos;

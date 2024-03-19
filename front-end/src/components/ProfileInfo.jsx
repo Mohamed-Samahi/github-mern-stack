@@ -1,3 +1,5 @@
+import React from "react";
+
 import { IoLocationOutline } from "react-icons/io5";
 import { RiGitRepositoryFill, RiUserFollowFill, RiUserFollowLine } from "react-icons/ri";
 import { FaXTwitter } from "react-icons/fa6";
@@ -5,7 +7,8 @@ import { TfiThought } from "react-icons/tfi";
 import { FaEye } from "react-icons/fa";
 import { formatMemberDate } from "../utils/formatDate";
 
-const ProfileInfo = ({ userProfile }) => {
+const ProfileInfo = React.memo(({ userProfile }) => {
+    if (!userProfile) return null;
 
     const memberSince = formatMemberDate(userProfile?.created_at)
 
@@ -116,6 +119,6 @@ const ProfileInfo = ({ userProfile }) => {
             </div>
         </div>
     );
-};
+});
 
 export default ProfileInfo;

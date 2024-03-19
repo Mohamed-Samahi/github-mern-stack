@@ -6,15 +6,16 @@ import { PiSignInBold } from "react-icons/pi";
 import { MdEditDocument } from "react-icons/md";
 import Logout from "./Logout";
 import { getUsernameFromSearchParams } from "../utils/getUrlParams";
+import { useAuth } from "../contexts/AuthContext";
 
 const Sidebar = () => {
     const location = useLocation()
     const username = getUsernameFromSearchParams();
-    const authUser = false;
+    const { authorizedUser } = useAuth();
 
     return (
         <aside
-            className='sticky top-0 left-0 flex flex-col items-center h-screen py-8 overflow-y-auto text-white border-r border-gray-800 min-w-12 sm:w-16 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 hover:bg-gray-600/10'
+            className='sticky top-0 left-0 flex flex-col items-center h-screen py-10 overflow-y-auto text-white border-r border-gray-800 min-w-12 sm:w-16 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 hover:bg-gray-600/10'
         >
             <nav className='flex flex-col h-full gap-3'>
                 <Link
@@ -32,7 +33,7 @@ const Sidebar = () => {
                     <IoHomeSharp size={20} />
                 </Link>
 
-                {authUser && (
+                {authorizedUser && (
                     <Link
                         to='/likes'
                         className={`p-1.5 flex justify-center transition-colors duration-200 rounded-lg hover:bg-gray-800 ${location.pathname === "/likes" ? "bg-gray-800" : null}`}
@@ -41,7 +42,7 @@ const Sidebar = () => {
                     </Link>
                 )}
 
-                {authUser && (
+                {authorizedUser && (
                     <Link
                         to='/explore'
                         className={`p-1.5  flex justify-center transition-colors duration-200 rounded-lg hover:bg-gray-800 ${location.pathname === "/explore" ? "bg-gray-800" : null}`}
@@ -50,7 +51,7 @@ const Sidebar = () => {
                     </Link>
                 )}
 
-                {!authUser && (
+                {!authorizedUser && (
                     <Link
                         to='/login'
                         className={`p-1.5 focus:outline-nones transition-colors duration-200 rounded-lg hover:bg-gray-800 ${location.pathname === "/login" ? "bg-gray-800" : null}`}
@@ -59,7 +60,7 @@ const Sidebar = () => {
                     </Link>
                 )}
 
-                {!authUser && (
+                {!authorizedUser && (
                     <Link
                         to='/signup'
                         className={`p-1.5 focus:outline-nones transition-colors duration-200 rounded-lg hover:bg-gray-800 ${location.pathname === "/signup" ? "bg-gray-800" : null}`}
@@ -67,7 +68,7 @@ const Sidebar = () => {
                         <MdEditDocument size={25} />
                     </Link>
                 )}
-                {authUser && (
+                {authorizedUser && (
                     <div className='flex flex-col gap-2 mt-auto'>
                         <Logout />
                     </div>
