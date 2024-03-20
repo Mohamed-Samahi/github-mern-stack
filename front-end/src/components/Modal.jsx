@@ -1,12 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useModal } from '../contexts/Logout';
 
 const Modal = () => {
     const { isOpen, closeModal, handleLogout } = useModal();
 
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+            document.body.style.height = '100vh';
+        } else {
+            document.body.style.overflow = 'visible';
+            document.body.style.height = 'auto';
+        }
+
+        return () => {
+            document.body.style.overflow = 'visible';
+            document.body.style.height = 'auto';
+        };
+    }, [isOpen]);
+
     if (!isOpen) {
         return null;
     }
+
     const handleBackgroundClick = (e) => {
         if (e.target === e.currentTarget) {
             closeModal();
@@ -16,7 +32,7 @@ const Modal = () => {
     return (
         <div
             onClick={handleBackgroundClick}
-            className="absolute top-0 bottom-0 left-0 right-0 z-[1000000000] flex items-center justify-center w-screen h-screen bg-black bg-opacity-50">
+            className="absolute top-0 bottom-0 left-0 right-0 z-[1000000000] flex items-center justify-center w-screen h-screen bg-black bg-opacity-80">
             <div className="max-w-md p-8 bg-white rounded shadow-lg">
                 <p className="text-lg">Are you sure you want to logout?</p>
                 <div className="flex justify-end mt-4">

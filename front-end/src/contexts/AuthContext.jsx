@@ -4,10 +4,11 @@ const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
     const [authorizedUser, setAuthotizedUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const checkUserLoggedIn = async () => {
-            // setLoading(true);
+            setLoading(true);
             try {
                 const res = await fetch("http://localhost:5000/api/auth/check", {
                     credentials: "include",
@@ -23,13 +24,13 @@ export const AuthContextProvider = ({ children }) => {
             } catch (error) {
                 console.error(error.message);
             } finally {
-                // setLoading(false);
+                setLoading(false);
             }
         };
         checkUserLoggedIn();
     }, []);
 
-    const value = { authorizedUser, setAuthotizedUser }
+    const value = { loading, authorizedUser, setAuthotizedUser }
 
     return (
         <AuthContext.Provider value={value}>
