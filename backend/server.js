@@ -1,4 +1,4 @@
-import express, { response } from "express";
+import express from "express";
 import dotenv from "dotenv"
 import cors from "cors"
 import passport from "passport";
@@ -22,7 +22,6 @@ const port = process.env.PORT || 5000;
 const __dirname = path.resolve()
 
 app.use(cors({
-    origin: 'http://localhost:3000',
     credentials: true  // Enable credentials (cookies, authorization headers, etc)
 }));
 
@@ -46,6 +45,6 @@ app.get("*", (request, response) => {
 });
 
 app.listen(port, () => {
-    console.log(`app is running on http://localhost:${port}`)
+    console.log(`app is running on ${port}`)
     connectToMongoDb();
 })
