@@ -19,7 +19,7 @@ export const ModalProvider = ({ children }) => {
 
     const handleLogout = useCallback(async () => {
         try {
-            const res = await fetch("http://localhost:5000/api/auth/logout", { credentials: "include" });
+            const res = await fetch("/api/auth/logout", { credentials: "include" });
 
             if (!res.ok) throw new Error("Couldn't logout!")
 

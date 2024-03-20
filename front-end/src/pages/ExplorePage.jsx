@@ -33,7 +33,7 @@ const ExplorePage = () => {
 
         try {
             const res = await fetch(
-                `http://localhost:5000/api/explore/repos/${language}?page=${page}`
+                `/api/explore/repos/${language}?page=${page}`
             );
 
             const { items } = await res.json();
