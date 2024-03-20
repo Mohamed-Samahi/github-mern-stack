@@ -1,6 +1,23 @@
+import { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 
 const LikesPage = () => {
+    const [likes, setLikes] = useState([]);
+
+    useEffect(() => {
+        const getLikes = async () => {
+            try {
+                const res = await fetch("/api/users/likes", { credentials: "include" });
+                const data = await res.json();
+                if (data.error) throw new Error(data.error);
+
+                setLikes(data.likedBy);
+            } catch (error) {
+                toast.error(error.message);
+            }
+        };
+        getLikes();
+    }, []);
 
     return (
         <div className='relative flex-1 flex-grow h-full px-4 overflow-x-auto rounded-lg shadow-md'>
@@ -22,30 +39,28 @@ const LikesPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr className='border-b bg-glass'>
-                        <td className='w-4 p-4'>
-                            <div className='flex items-center'>
-                                <span>1</span>
-                            </div>
-                        </td>
-                        <th scope='row' className='flex items-center px-6 py-4 whitespace-nowrap '>
-                            <img
-                                className='w-10 h-10 rounded-full'
-                                src={"https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745"}
-                                alt='Jese image'
-                            />
-                            <div className='ps-3'>
-                                <div className='text-base font-semibold'>dasdas</div>
-                            </div>
-                        </th>
-                        <td className='px-6 py-4'>das</td>
-                        <td className='px-6 py-4'>
-                            <div className='flex items-center'>
-                                <FaHeart size={22} className='mx-2 text-red-500' />
-                                Liked your profile
-                            </div>
-                        </td>
-                    </tr>
+                    {likes.map((user, idx) => (
+                        <tr className='border-b bg-glass' key={user.username}>
+                            <td className='w-4 p-4'>
+                                <div className='flex items-center'>
+                                    <span>{idx + 1}</span>
+                                </div>
+                            </td>
+                            <th scope='row' className='flex items-center px-6 py-4 whitespace-nowrap '>
+                                <img className='w-10 h-10 rounded-full' src={user.avatarUrl} alt='User Avatar' />
+                                <div className='ps-3'>
+                                    <div className='text-base font-semibold'>{user.username}</div>
+                                </div>
+                            </th>
+                            <td className='px-6 py-4'>{formatDate(user.likedDate)}</td>
+                            <td className='px-6 py-4'>
+                                <div className='flex items-center'>
+                                    <FaHeart size={22} className='mx-2 text-red-500' />
+                                    Liked your profile
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>

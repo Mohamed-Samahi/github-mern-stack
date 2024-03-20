@@ -6,6 +6,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import { TfiThought } from "react-icons/tfi";
 import { FaEye } from "react-icons/fa";
 import { formatMemberDate } from "../utils/formatDate";
+import LikeProfile from "./LikeProfile";
 
 const ProfileInfo = React.memo(({ userProfile }) => {
     if (!userProfile) return null;
@@ -22,6 +23,7 @@ const ProfileInfo = React.memo(({ userProfile }) => {
                     </a>
                     {/* View on Github */}
                     <div className='flex flex-col items-center gap-2 mb-2 lg:mb-0'>
+                        <LikeProfile userProfile={userProfile} />
                         <a
                             href={userProfile?.html_url}
                             target='_blank'
