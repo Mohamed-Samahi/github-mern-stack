@@ -1,8 +1,9 @@
-import express from "express";
+import express, { response } from "express";
 import dotenv from "dotenv"
 import cors from "cors"
 import passport from "passport";
 import session from "express-session";
+import path from "path"
 
 import "./passport/github.auth.js"
 
@@ -15,6 +16,10 @@ import connectToMongoDb from "./db/connectMongoDB.js";
 dotenv.config();
 
 const app = express();
+
+const port = process.env.PORT || 5000;
+
+const __dirname = path.resolve()
 
 app.use(cors({
     origin: 'http://localhost:3000',
@@ -34,7 +39,13 @@ app.use("/api/user", userRoutes);
 
 app.use("/api/explore", exploreRoutes)
 
-app.listen(5000, () => {
-    console.log("app is listening on port 5000")
+app.use(express.static(path.join(__dirname, "/front-end/dist")))
+
+app.get("*", (request, response) => {
+    response.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+});
+
+app.listen(port, () => {
+    console.log(`app is running on http://localhost:${port}`)
     connectToMongoDb();
 })
