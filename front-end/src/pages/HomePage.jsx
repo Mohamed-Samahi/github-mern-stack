@@ -17,9 +17,13 @@ const HomePage = React.memo(() => {
             }
             {(userProfile && sortedRepositories && !loading) ? (
                 <div className='flex flex-col items-start justify-center gap-4 md:flex-row'>
-                    {userProfile && <ProfileInfo userProfile={userProfile} />}
+                    {userProfile ? <ProfileInfo userProfile={userProfile} /> : (
+                        <div>Couldn't get Profile Info to display!</div>
+                    )}
                     <div className="lg:w-2/3 ">
-                        {sortedRepositories && <Repos repositories={sortedRepositories} />}
+                        {sortedRepositories ? <Repos repositories={sortedRepositories} /> : (
+                            <div>Couldn't get repositories to display!</div>
+                        )}
                     </div>
                 </div>
             ) : null

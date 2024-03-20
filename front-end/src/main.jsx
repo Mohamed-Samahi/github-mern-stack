@@ -11,15 +11,15 @@ import { ModalProvider } from './contexts/Logout.jsx';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
-    <AuthContextProvider>
-      <ModalProvider>
-        <UserProvider>
-          <App />
-        </UserProvider>
-      </ModalProvider>
-    </AuthContextProvider>
-  </BrowserRouter>
-  // <React.StrictMode>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <BrowserRouter>
+      <AuthContextProvider>
+        <ModalProvider>
+          <UserProvider>
+            <App />
+          </UserProvider>
+        </ModalProvider>
+      </AuthContextProvider>
+    </BrowserRouter>
+  </React.StrictMode>
 )

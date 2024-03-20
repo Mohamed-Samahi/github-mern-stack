@@ -67,14 +67,14 @@ const ProfileInfo = React.memo(({ userProfile }) => {
 
                 {/* Member Since Date */}
                 <div className='my-2'>
-                    <p className='text-sm font-bold text-gray-600'>Member since</p>
+                    <p className='text-sm font-bold text-blue-500'>Member since</p>
                     <p className=''>{memberSince === "Invalid Date" ? null : memberSince}</p>
                 </div>
 
                 {/* Email Address */}
                 {userProfile?.email ? (
                     <div className='my-2'>
-                        <p className='text-sm font-bold text-gray-600'>Email address</p>
+                        <p className='text-sm font-bold text-blue-500'>Email address</p>
                         <p className=''>{userProfile.email}</p>
                     </div>
                 ) : null}
@@ -82,14 +82,14 @@ const ProfileInfo = React.memo(({ userProfile }) => {
                 {/* Full Name */}
                 {userProfile?.name ? (
                     <div className='my-2'>
-                        <p className='text-sm font-bold text-gray-600'>Full name</p>
+                        <p className='text-sm font-bold text-blue-500'>Full name</p>
                         <p className=''>{userProfile?.name}</p>
                     </div>
                 ) : null}
 
                 {/* Username */}
                 <div className='my-2'>
-                    <p className='text-sm font-bold text-gray-600'>Username</p>
+                    <p className='text-sm font-bold text-blue-500'>Username</p>
                     <p className=''>{userProfile?.login}</p>
                 </div>
             </div>

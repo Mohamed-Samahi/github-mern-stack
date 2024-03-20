@@ -6,19 +6,21 @@ const Repos = React.memo(({ repositories }) => {
 
     return (
         <div className={`w-full bg-glass rounded-lg px-8 py-6`}>
-            <ol className='relative w-full border-gray-200 border-s'>
-
+            <ul className='relative w-full border-gray-200 border-s'>
                 {repositories?.length === 0 ?
-                    <li className="whitespace-nowrap">No Repositories Found!</li>
+                    <li className="mb-10 whitespace-nowrap ms-7">No Repositories Found!</li>
                     : null
                 }
 
                 {repositories?.map((repository, index) => (
-                    <div key={`${index}-${repository?.name}`}>
+                    <li
+                        key={`${index}-${repository?.name}`}
+                        className='mb-10 ms-7'
+                    >
                         <Repo repository={repository} />
-                    </div>
+                    </li>
                 ))}
-            </ol>
+            </ul>
         </div>
     );
 });

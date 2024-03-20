@@ -20,7 +20,7 @@ const Repo = React.memo(({ repository }) => {
     };
 
     return (
-        <li className='mb-10 ms-7'>
+        <div>
             <span
                 className='absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white'
             >
@@ -35,25 +35,34 @@ const Repo = React.memo(({ repository }) => {
                 >
                     {repository?.name}
                 </a>
-                <span
-                    className='bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5
+                <ul className="flex flex-wrap items-center gap-2">
+                    <li>
+                        <span
+                            className='bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5
 					py-0.5 rounded-full flex items-center gap-1'
-                >
-                    <FaRegStar /> {repository?.stargazers_count}
-                </span>
-                <span
-                    className='bg-purple-100 text-purple-800 text-xs font-medium
-					 px-2.5 py-0.5 rounded-full flex items-center gap-1'
-                >
-                    <FaCodeFork /> {repository?.forks_count}
-                </span>
-                <span
-                    onClick={() => handleCloneClick(repository?.clone_url)}
-                    className='cursor-pointer bg-green-100 text-green-800 text-xs
-					font-medium px-2.5 py-0.5 rounded-full flex items-center gap-1'
-                >
-                    <FaCopy /> Clone
-                </span>
+                        >
+                            <FaRegStar /> {repository?.stargazers_count}
+                        </span>
+                    </li>
+                    <li>
+                        <span
+                            className='bg-purple-100 text-purple-800 text-xs font-medium
+                        px-2.5 py-0.5 rounded-full flex items-center gap-1'
+                        >
+                            <FaCodeFork /> {repository?.forks_count}
+                        </span>
+                    </li>
+                    <li>
+
+                        <span
+                            onClick={() => handleCloneClick(repository?.clone_url)}
+                            className='cursor-pointer bg-green-100 text-green-800 text-xs
+                        font-medium px-2.5 py-0.5 rounded-full flex items-center gap-1'
+                        >
+                            <FaCopy /> Clone
+                        </span>
+                    </li>
+                </ul>
             </div>
 
             <time
@@ -61,14 +70,14 @@ const Repo = React.memo(({ repository }) => {
             >
                 Released on {formatedDate}
             </time>
-            <p className='mb-4 text-base font-normal text-gray-500'>
+            <p className='mb-4 text-base font-normal text-white'>
                 {repository?.description ? repository?.description : "No Description Provided!"}
             </p>
             {repository?.language ?
                 <img src={PROGRAMMING_LANGUAGES[repository?.language]} alt='Programming language icon' className='h-8' />
                 : null
             }
-        </li>
+        </div>
     );
 });
 

@@ -20,6 +20,8 @@ const Sidebar = () => {
             <nav className='flex flex-col h-full gap-3'>
                 <Link
                     to='/'
+                    name="home-page"
+                    aria-label="Go to home page"
                     className='flex justify-center'
                 >
                     <img className='h-8' src='/github.svg' alt='Github Logo' />
@@ -27,6 +29,8 @@ const Sidebar = () => {
 
                 <Link
                     to={`/?username=${username}`}
+                    name="home-page-username"
+                    aria-label="Go to home page with default username"
                     className={`p-1.5 flex justify-center transition-colors duration-200 rounded-lg 
 					hover:bg-gray-800 ${location.pathname === "/" ? "bg-gray-800" : null}`}
                 >
@@ -36,6 +40,8 @@ const Sidebar = () => {
                 {authorizedUser && (
                     <Link
                         to='/likes'
+                        name="likes-page"
+                        aria-label="Go to likes page"
                         className={`p-1.5 flex justify-center transition-colors duration-200 rounded-lg hover:bg-gray-800 ${location.pathname === "/likes" ? "bg-gray-800" : null}`}
                     >
                         <FaHeart size={22} />
@@ -45,6 +51,8 @@ const Sidebar = () => {
                 {authorizedUser && (
                     <Link
                         to='/explore'
+                        name="explore-page"
+                        aria-label="Go to explore page"
                         className={`p-1.5  flex justify-center transition-colors duration-200 rounded-lg hover:bg-gray-800 ${location.pathname === "/explore" ? "bg-gray-800" : null}`}
                     >
                         <MdOutlineExplore size={25} />
@@ -54,6 +62,8 @@ const Sidebar = () => {
                 {!authorizedUser && (
                     <Link
                         to='/login'
+                        name="login-page"
+                        aria-label="Go to login page"
                         className={`p-1.5 focus:outline-nones transition-colors duration-200 rounded-lg hover:bg-gray-800 ${location.pathname === "/login" ? "bg-gray-800" : null}`}
                     >
                         <PiSignInBold size={25} />
@@ -63,6 +73,8 @@ const Sidebar = () => {
                 {!authorizedUser && (
                     <Link
                         to='/signup'
+                        name="signup"
+                        aria-label="Go to signup page"
                         className={`p-1.5 focus:outline-nones transition-colors duration-200 rounded-lg hover:bg-gray-800 ${location.pathname === "/signup" ? "bg-gray-800" : null}`}
                     >
                         <MdEditDocument size={25} />
