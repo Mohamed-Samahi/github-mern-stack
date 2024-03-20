@@ -58,6 +58,8 @@ const ProfileInfo = React.memo(({ userProfile }) => {
                         href={`https://twitter.com/${userProfile.twitter_username}`}
                         target='_blank'
                         rel='noreferrer'
+                        name="user-profile-image"
+                        aria-label="user profile image"
                         className='flex items-center gap-2 hover:text-sky-500'
                     >
                         <FaXTwitter />
