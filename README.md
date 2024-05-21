@@ -21,7 +21,7 @@ GitHub Explorer is a web application that allows users to search for GitHub prof
 
 1. **Clone the repository**:
     ```sh
-    git clone https://github.com/yourusername/github-mern-stack.git
+    git clone https://github.com/Mohamed-Samahi/github-mern-stack.git
     ```
 
 2. **Navigate to each folder and install dependencies**:
