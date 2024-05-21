@@ -26,14 +26,13 @@ GitHub Explorer is a web application that allows users to search for GitHub prof
 
 2. **Navigate to each folder and install dependencies**:
 
-    For the backend:
+    For the backend, run the installation command at the root folder, where the package.json file exists:
     ```sh
-    cd backend
     npm install
     cd ..
     ```
 
-    For the frontend:
+    For the frontend, navigate to the frontend folder and run the installation command:
     ```sh
     cd front-end
     npm install
